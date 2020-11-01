@@ -6,7 +6,7 @@ public class Bilde extends Tekst {
 
 	// TODO - objekt variable
 	private String url;
-	
+
 	public Bilde(int id, String bruker, String dato, String tekst, String url) {
 		super(id, bruker, dato, tekst);
 		this.url = url;
@@ -16,7 +16,7 @@ public class Bilde extends Tekst {
 		super(id, bruker, dato, likes, tekst);
 		this.url = url;
 	}
-	
+
 	public String getUrl() {
 		return url;
 
@@ -28,19 +28,19 @@ public class Bilde extends Tekst {
 
 	@Override
 	public String toString() {
-		
+
 		String newString = super.toString() + url + "\n";
-		
+
 		String bildeToString = newString.replace("TEKST", "BILDE");
-		
+
 		return bildeToString;
 
 	}
 
 	// Metoden nedenfor er kun for valgfri oppgave 6
 	public String toHTML() {
-		
-		throw new UnsupportedOperationException(TODO.method());
-				
+
+		return String.format("%s\n<iframe src=\"%s\" height=600 width=800></iframe>", super.toHTML(), url);
+
 	}
 }
