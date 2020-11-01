@@ -1,28 +1,50 @@
 package no.hvl.dat100.jplab11.oppgave5;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
-
-import no.hvl.dat100.jplab11.common.TODO;
-import no.hvl.dat100.jplab11.oppgave1.*;
 import no.hvl.dat100.jplab11.oppgave2.*;
 import no.hvl.dat100.jplab11.oppgave3.*;
 
-import javax.swing.JOptionPane;
-
 public class LesBlogg {
 
-	private static String TEKST = "TEKST";
-	private static String BILDE = "BILDE";
+	private static final String TEKST = "TEKST";
+	private static final String BILDE = "BILDE";
 
 	public static Blogg les(String mappe, String filnavn) {
 
-		throw new UnsupportedOperationException(TODO.method());
+		Blogg samling = null;
+
+		try (BufferedReader reader = new BufferedReader(new FileReader(mappe + filnavn))) {
+
+			int antall = Integer.parseInt(reader.readLine());
+
+			samling = new Blogg(antall);
+
+			for (int i = 0; i < antall; i++) {
+
+				String typeInnlegg = reader.readLine();
+
+				switch (typeInnlegg) {
+				case (TEKST):
+					samling.leggTil(new Tekst(Integer.parseInt(reader.readLine()), reader.readLine(), reader.readLine(),
+							Integer.parseInt(reader.readLine()), reader.readLine()));
+					break;
+				case (BILDE):
+					samling.leggTil(new Bilde(Integer.parseInt(reader.readLine()), reader.readLine(), reader.readLine(),
+							Integer.parseInt(reader.readLine()), reader.readLine(), reader.readLine()));
+					break;
+				default:
+					throw new IllegalArgumentException("Bad file format");
+				}
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return samling;
 
 	}
 }
