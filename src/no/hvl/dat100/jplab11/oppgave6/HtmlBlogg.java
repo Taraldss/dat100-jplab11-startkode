@@ -20,11 +20,11 @@ public class HtmlBlogg extends Blogg {
 	public String toString() {
 		
 		int antall = getAntall();
-		Innlegg[] innlegg = getSamling();
+		Innlegg[] bloggInnlegg = getSamling();
 		
 		String htmlBlogg = "";
 		for (int i = 0; i < antall; ++i) {
-			htmlBlogg += innlegg[i].toHTML() + "\n<hr>";
+			htmlBlogg += bloggInnlegg[i].toHTML() + "\n<hr>";
 		}
 		
 		String html = HTMLPREFIX + htmlBlogg + HTMLPOSTFIX;
